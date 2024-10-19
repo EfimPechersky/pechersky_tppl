@@ -79,15 +79,17 @@ _start:
     arrsum x, xlen
     sub al, bl
     mov cl, 128
-    cmp al, cl
+    cmp rax, rcx
     jl printans
+    print minus, 1
     mov cl, al
-    mov al, 256
+    mov al, 0
     sub al, cl
+    
+printans:
     xor dl, dl
     mov rbx, reallen
     div rbx
-printans:
     dprint
     subprint rdx, rbx, 2
     print newline, nlen
@@ -103,6 +105,7 @@ section .data
     ylen equ $-y
     reallen equ ($-x)/8
     dotsymb db ".",0xA, 0xD
+    minus db "-", 0xA, 0xD
     done db "Done",0xA, 0xD
     len equ $ - done
     newline db 0xA, 0xD
